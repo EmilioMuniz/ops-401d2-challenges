@@ -11,14 +11,12 @@
 # Declaration of functions:
 
 # Main
-#import time
-#import datetime
-import os
+import time, datetime, os
 
-ip_list = ["127.0.0.1", "10.0.0.7"]
+ip_list = ["8.8.8.8", "10.0.0.8"]
 for ip in ip_list:
-    response = os.popen(f"ping {ip}").read()
-    if "Received" in response:
+    response = os.popen(f"ping -c 1 {ip}").read()
+    if "1 received" in response:
         print(f"UP {ip} Ping Successful")
     else:
         print(f"DOWN {ip} Ping Unsuccessful")

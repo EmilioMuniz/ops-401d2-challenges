@@ -16,7 +16,7 @@ import time, datetime, os, smtplib
 server = smtplib.SMTP_SSL("smtp.gmail.com", 465)
 server.ehlo()
 
-server.login("emiliomuniz1@gmail.com", "BuzzCut76!!")
+server.login("emiliomuniz1@gmail.com", "B********!!")
 
 msg1 = "Attention! \n Network Host Status is DOWN."
 msg2 = "Attention! \n Network Host Status is UP."

@@ -13,13 +13,22 @@
 # Main
 import time, datetime, os
 
-ip_list = ["8.8.8.8", "10.0.0.8"]
+ip_list = ["8.8.8.8"]
 for ip in ip_list:
     response = os.popen(f"ping -c 1 {ip}").read()
     if "1 received" in response:
-        print(f"UP {ip} Ping Successful")
+        print(f"UP {ip} Network Active")
     else:
-        print(f"DOWN {ip} Ping Unsuccessful")
+        print(f"DOWN {ip} Network Inactive")
+
+while True:
+   now = datetime.datetime.now()
+   print(str(now) + " " + response)
+   time.sleep( 2 )
+   print("Network Active")
+
+# End
+# References: https://www.youtube.com/watch?v=PTUhiDnYrbs
 
 
 

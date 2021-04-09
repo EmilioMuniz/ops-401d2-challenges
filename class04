@@ -1,4 +1,26 @@
+# Script:                   ops-401d2-lab-class04.ps1                       
+# Author:                   Emilio Muniz                       
+# Date of latest revision:  4/08/2021    
+# Purpose:                  Enable password complexity and smbv1.
+
+# Declaration of variables
+
+# Declaration of functions
+
+# Main
 secedit /export /cfg c:\secpol.cfg
 (GC C:\secpol.cfg) -Replace "PasswordComplexity = 0","PasswordComplexity = 1" | Out-File C:\secpol.cfg
 secedit /configure /db c:\windows\security\local.sdb /cfg c:\secpol.cfg /areas SECURITYPOLICY
 Remove-Item C:\secpol.cfg -Force
+
+# Detect smbv1
+Get-WindowsOptionalFeature -Online -FeatureName smb1protocol
+
+# Disable smbv1
+Disable-WindowsOptionalFeature -Online -FeatureName smb1protocol
+
+# Enable smbv1
+Enable-WindowsOptionalFeature -Online -FeatureName smb1protocol
+
+# End
+# References: https://docs.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/password-must-meet-complexity-requirements https://docs.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3

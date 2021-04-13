@@ -17,6 +17,7 @@ def write_key():
     key = Fernet.generate_key()
     with open("key.key", "wb") as key_file:
         key_file.write(key)
+        print("Key is "+str(key.decode('utf-8')))
 
 def load_key():
     return open("key.key", "rb").read()

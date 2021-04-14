@@ -10,6 +10,7 @@ y_n = "y"
 
 # Import Libraries
 from cryptography.fernet import Fernet
+import os, pyAesCrypt, glob 
 
 
 # Declaration of functions:
@@ -84,4 +85,47 @@ while True:
         print("See ya later!")
         break
 
+# Encryption/decryption buffer size - 64K
+bufferSize = 64 * 1024
+# Get current directory
+curDir = os.getcwd()
+# Prompt user for password to encrypt files
+password1 = input('\n> Enter password to encrypt: ')
+ 
+print('\n> Beginning recursive encryption...\n\n')
+# Main loop to encrypt all files recursively
+for x in glob.glob('.\\**\*', recursive=True):
+    fullpath = os.path.join(curDir, x)
+    fullnewf = os.path.join(curDir, x + '.aes')
+    # Encrypt
+    if os.path.isfile(fullpath):
+        print('>>> Original: \t' + fullpath + '')
+        print('>>> Encrypted: \t' + fullnewf + '\n')
+        pyAesCrypt.encryptFile(fullpath, fullnewf, password1, bufferSize)
+        # Remove file after encryption
+        os.remove(fullpath)
+
+# Encryption/decryption buffer size - 64K
+bufferSize = 64 * 1024
+# Get current directory
+curDir = os.getcwd()
+# Prompt user for password to decrypt files
+password1 = input('\n> Enter password to decrypt: ')
+ 
+print('\n> Beginning recursive decryption...\n\n')
+# Main loop to decrypt all files recursively
+for x in glob.glob('.\\**\*', recursive=True):
+    fullpath = os.path.join(curDir, x)
+    fullnewf = os.path.join(curDir, os.path.splitext(x)[0])
+    # Decrypt
+    if os.path.isfile(fullpath):
+        print('>>> Encrypted: \t' + fullpath + '')
+        try:
+            pyAesCrypt.decryptFile(fullpath, fullnewf, password1, bufferSize)
+            print('>>> Decrypted: \t' + fullnewf + '\n')
+            os.remove(fullpath)     # Remove encrypted file after decrypt
+        except ValueError:
+            print('>>> Error - Wrong password!\n')
 #End
+
+# References: https://codeonby.com/2019/12/18/recursive-file-encryption-in-python-3/

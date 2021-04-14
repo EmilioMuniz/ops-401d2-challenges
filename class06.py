@@ -6,10 +6,10 @@
 # Purpose:                  File Encryption Script.
 
 # Declaration of variables:
+y_n = "y"
 
 # Import Libraries
 from cryptography.fernet import Fernet
-import inquirer
 
 
 # Declaration of functions:
@@ -22,34 +22,66 @@ def write_key():
 def load_key():
     return open("key.key", "rb").read()
 
+def encrypt_message():
+    user_message = input("Enter message to encrypt: ")
+    message_e = user_message.encode()
+    f = Fernet(key)
+    encrypted = f.encrypt(message_e)
+    print("Encrypted message: ")
+    print(encrypted)
+
+def decrypt_message():
+    user_message = input("Enter message to decrypt: ")
+    message_d = str.encode()
+    f = Fernet(key)
+    decrypted = f.decrypt(message_d)
+    print("Decrypted message: ")
+    print(str(decrypted.decode('utf-8')))
+
+def encrypt_file():
+    f = Fernet(key)
+    filename = input("Enter file path for file to encrypt: ")
+    with open(filename, "rb") as file:
+        file_data = file.read()
+    encrypted_file = f.encrypt(file_data)
+    with open(filename, "wb") as file:
+        file.write(encrypted_file)
+
+def decrypt_file():
+    f = Fernet(key)
+    filename = input("Enter file path for file to decrypt: ")
+    with open(filename, "rb") as file:
+        encrypted_doc = file.read()
+    decrypted_info = f.decrypt(encrypted_doc)
+    with open(filename, "wb") as file:
+        file.write(decrypted_info)
+
+def ask_user():
+    mode = input("\nSelect a mode: \nMode 1: Encrypt a File \nMode 2: Decrypt a File \nMode 3: Encrypt a Message \nMode 4: Decrypt a Message\n")
+    if (mode== "1"):
+        encrypt_file()
+        print("File encrypted.")
+    elif (mode== "2"):
+        decrypt_file()
+        print("File decrypted.")
+    elif (mode== "3"):
+        encrypt_message()
+    elif (mode== "4"):
+        decrypt_message()
+    elif ((mode != "1") and (mode != "2") and (mode != "3") and (mode != "4")):
+        print("Invalid input.")
 
 # Main
-write_key()
+#write_key()
 
 # load the previously generated key
 key = load_key()
 
-message = "Hello there!".encode()
+while True:
+    ask_user()
+    y_n = input("Try again? y/n\n")
+    if y_n == "n":
+        print("See ya later!")
+        break
 
-# initialize the Fernet class
-#f = Fernet(key)
-
-# encrypt the message
-#encrypted = f.encrypt(message)
-
-# print how it looks
-#print(encrypted)
-questions = [
-  inquirer.List('method',
-                message="Select Mode:",
-                choices=["Mode 1 Encrypt a File", "Mode 2 Decrypt a File", "Mode 3 Encrypt a Message", "Mode 4 Decrypt a Message"],
-            ),
-]
-answers = inquirer.prompt(questions)
-#print ("Performing:", answers['method'])
-#choice = input("Would you like to proceed? y/n""\n")
-#if answers == "Mode 1 Encrypt a File":
-#    g = requests.get(webpage)
-#    print(g.text)
-#elif choice == "n":
-#    print("Goodbye!")
+#End

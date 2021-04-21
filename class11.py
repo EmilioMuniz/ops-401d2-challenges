@@ -42,7 +42,7 @@ for dst_port in port_range:
 
     elif(response.haslayer(ICMP)):
         if(
-            int(response.getlayer(ICMO).type) == 3 and
+            int(response.getlayer(ICMP).type) == 3 and
             int(response.getlayer(ICMP).code) in [1,2,3,9,10,13]
         ):
             print(f"{host}:{dst_port} is filtered (silently dropped).")

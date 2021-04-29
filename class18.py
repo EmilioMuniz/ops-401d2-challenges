@@ -25,3 +25,19 @@ password = "sunday"
 
 with ZipFile(zip_file) as zf:
   zf.extractall(pwd=bytes(password,'utf-8'))
+try:
+    s.login(host, username, pwd)
+    s.sendline("uptime")
+    s.prompt()
+    print(s.before)
+    s.sendline("ls -l")
+    s.prompt()
+    print(s.before)
+    s.sendline("df")
+    s.prompt()
+    print(s.before)
+    s.logout()
+
+except pxssh.ExceptionPxssh as e:
+    print("Pxssh failed to login.")
+    print(e)

@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
-# Script:                   ops-401d2-challenge-class26.py                       
+# Script:                   ops-401d2-challenge-class27.py                       
 # Author:                   Emilio Muniz                       
-# Date of latest revision:  5/10/2021    
-# Purpose:                  Create logging capabilities.
+# Date of latest revision:  5/11/2021    
+# Purpose:                  Create logging capabilities part 2.
 
 # Import Libraries
 import logging

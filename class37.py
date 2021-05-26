@@ -9,32 +9,18 @@
 import requests
 
 # Declare variables:
-cookies = dict(name='ASPSESSIONIDCAAAQSTQ=DCPHAALCMALIHMCMPIFCIEIE')
 targetsite = "http://www.whatarecookies.com/cookietest.asp"
 response = requests.get(targetsite)
 cookie = response.cookies
-response = requests.get(targetsite, cookies=cookies)
-
-# Define functions:
-def bringforthcookiemonster(): # Because why not!
-    print('''
-
-              .---. .---.
-             :     : o   :    me want cookie!
-         _..-:   o :     :-.._    /
-     .-''  '  `---' `---' "   ``-.
-   .'   "   '  "  .    "  . '  "  `.
-  :   '.---.,,.,...,.,.,.,..---.  ' ;
-  `. " `.                     .' " .'
-   `.  '`.                   .' ' .'
-    `.    `-._           _.-' "  .'  .----.
-      `. "    '"--...--"'  . ' .'  .'  o   `.
-
-        ''')
-
-# Main
-bringforthcookiemonster()
 print("Target site is " + targetsite)
-print(cookie)
- 
+print("Response cookie: " + str(cookie))
+
+
+response = requests.get(targetsite, cookies=cookie)
+cookie2 = response.cookies
+print("Target site is " + targetsite)
+print("Response cookie: " + str(cookie))
+print(response.text, file = open("./class-37.html", "a"))
+print("Response saved as response.html")
+
 # End

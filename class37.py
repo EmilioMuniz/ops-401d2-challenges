@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
-# Script:                   ops-401d2-challenge-class36.py                       
+# Script:                   ops-401d2-challenge-class37.py                       
 # Author:                   Emilio Muniz                       
-# Date of latest revision:  5/24/2021    
-# Purpose:                  Fingerprinting Part 1 of 3.
+# Date of latest revision:  5/25/2021    
+# Purpose:                  Cookie Capture.
 
 # Import libraries:
 import requests
